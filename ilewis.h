@@ -26,7 +26,7 @@ extern uint TAPE_THRESH;
 extern uint TAPE_KP;
 extern uint TAPE_KD;
 extern uint TAPE_SPEED;
-void print_follow_tape(int);
+void print_lewis(int);
 #endif
 
 // --------------------------
