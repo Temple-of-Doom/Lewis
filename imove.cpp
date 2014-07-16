@@ -1,7 +1,9 @@
 #include "ilewis.h"
 
-motorClass motor;
+Servo253* Servo253::servo[1];
 Servo253 RCServo1;
+
+motorClass motor;
 	
 static volatile uint speed;
 static volatile bool moving;
