@@ -4,13 +4,8 @@
 #include "LiquidCrystal.h"
 #include "HardwareTimer2.h"
 #include "imotor.h"
+#include "Servo253.h"
 
-// -------------------------------------------------------
-// Servo Stuff here for now. Move into Servo.h once needed
-const int RCServo0Output    	= 35 ;
-const int RCServo1Output    	= 31 ;
-const int RCServo2Output    	= 34 ;
-// -------------------------------------------------------
 
 // Typedefs
 typedef unsigned int uint;
@@ -27,6 +22,7 @@ extern uint TAPE_KP;
 extern uint TAPE_KD;
 extern uint TAPE_SPEED;
 void print_lewis(int);
+void spinning_jon_DEBUG(uint);
 #endif
 
 // --------------------------
@@ -39,6 +35,10 @@ void print_lewis(int);
 // TINAH PWM
 #define pMOTOR_L 3
 #define pMOTOR_R 1
+#define pSPINNING_JON 2
+
+// Servo
+#define RC_SERVO_OUTPUT 31
 
 // Speed
 #define TAPE_SPEED 250
@@ -46,6 +46,7 @@ void print_lewis(int);
 #define TEMPLE_SPEED 150
 #define TEMPLE_PICKUP_SPEED 0
 #define ROTATE_SPEED 100
+#define SPINNING_JON_SPEED 500
 
 // PID Timer in ms
 #define PID_TIME 50
@@ -65,6 +66,7 @@ extern uint32 startTime;
 
 // lewis.c
 void run_lewis();
+void lewis_arm_setup();
 void lewis_tape();
 void lewis_find_ir();
 void lewis_tempel();
@@ -83,8 +85,9 @@ void end_display();
 
 // move.c
 void set_speed(int);
+void spinning_jon_pulse();
+void servo_swerve();
 void follow_tape();
-void pickup_idol();
 void follow_ir();
 void rotate();
 

@@ -68,6 +68,7 @@ void initialize()
     // 0. Whole Course
     // 1. Tape new Parameters
     // 2. Tape default Parameters
+	// 3. Run Spinning Jon
     while (!startbutton()) {
          LCD.clear(); LCD.home();
          LCD.setCursor(0,0); LCD.print("What to do?");
@@ -213,6 +214,40 @@ void initialize()
         while (!stopbutton()) { lewis_tape(); }
         initialize();
     }
+
+	if (option == 3) {
+		//run the spinning jon
+		LCD.home(); LCD.clear();
+		LCD.println("Spinning JON!!!!");
+		delay(startDelay);
+		
+		int selection = 0;
+		//select whether to do a servo run
+		while(!startbutton()) {
+			selection = knob6();
+			LCD.home(); LCD.clear();
+			LCD.setCursor(0,0); LCD.print("Perform Servo?");
+			LCD.setCursor(0,1); LCD.print((selection > 300 ? "Yes" : "No"));
+			delay(setDelay);
+		}
+		//if selection is yes run servo
+		if(selection > 300) { servo_swerve(); }
+        delay(nextDelay);
+
+        uint velocity = knob7();
+        uint i = 0;
+        //spin the spinning jon
+        while(true) {
+            ++i;
+            velocity = knob7();
+            spinning_jon_DEBUG(velocity);
+            if (i > 40) {
+                print_lewis(velocity);
+                i = 0;
+            }
+        }
+	}
+
     LCD.clear(); LCD.home();
     LCD.setCursor(0,0); LCD.print("Sorry");
     LCD.setCursor(0,1); LCD.print("Try Again");

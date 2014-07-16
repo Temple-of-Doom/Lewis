@@ -1,7 +1,8 @@
 #include "ilewis.h"
 
 motorClass motor;
-
+Servo253 RCServo1;
+	
 static volatile uint speed;
 static volatile bool moving;
 
@@ -22,22 +23,35 @@ void set_speed(int v)
 void follow_tape()
 {
     int speedAdj = tape_adjustment();
-
+	
     if (!moving) { return; }
 
     motor.speed(pMOTOR_L, (speed + speedAdj));
     motor.speed(pMOTOR_R, (speed - speedAdj));
-}
-
-void pickup_idol()
-{
-    delay(2000);
+	spinning_jon_pulse();
 }
 
 void follow_ir()
 {
 }
-
 void rotate()
 {
 }
+
+void servo_swerve()
+{
+	RCServo1.attach(RC_SERVO_OUTPUT);
+	delay(1000);
+
+	for (uint pos = 60; pos < 180; ++pos) {
+		RCServo1.write(pos);
+		delay(15);
+	}
+	RCServo1.detach();
+}
+
+void spinning_jon_pulse() {	motor.speed(pSPINNING_JON, SPINNING_JON_SPEED); }
+
+#if DEBUG
+void spinning_jon_DEBUG(uint v) { motor.speed(pSPINNING_JON, v); }
+#endif
