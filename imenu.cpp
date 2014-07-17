@@ -63,7 +63,8 @@ void initialize()
     uint knobScale   = 3;
     uint knobPos     = knob6();
     uint option;
-
+    int optionCount = 5;
+    int modifier = 1023/optionCount;
     // Choose options
     // 0. Whole Course
     // 1. Tape new Parameters
@@ -73,7 +74,7 @@ void initialize()
          LCD.clear(); LCD.home();
          LCD.setCursor(0,0); LCD.print("What to do?");
          LCD.setCursor(0,1); LCD.print(knobPos);
-         knobPos = knob6() / 128;
+         knobPos = knob6() / modifier;
          option = knobPos;
          delay(setDelay);
     }
