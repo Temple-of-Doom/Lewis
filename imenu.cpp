@@ -211,7 +211,12 @@ void initialize()
             if (stopbutton()) { initialize(); }
             delay(startDelay);
         }
-        while (!stopbutton()) { lewis_tape(); }
+        while (!stopbutton()) { 
+            LCD.clear(); LCD.home();
+            LCD.setCursor(0,0); LCD.print("Driving!");
+            lewis_tape();
+        }
+        set_speed(0);
         initialize();
     }
 
@@ -237,16 +242,33 @@ void initialize()
         uint velocity = knob7();
         uint i = 0;
         //spin the spinning jon
-        while(true) {
-            ++i;
+        while(!stopbutton()) {
             velocity = knob7();
             spinning_jon_DEBUG(velocity);
-            if (i > 40) {
-                print_lewis(velocity);
-                i = 0;
-            }
+            print_lewis(velocity);
+            ++i;
+            delay(setDelay);
         }
+        initialize();
 	}
+    if (option == 4) {
+        LCD.home(); LCD.clear();
+        LCD.setCursor(0,0); LCD.print("Test H-Bridge");
+        LCD.setCursor(0,1); LCD.print("Start");
+
+        while (!startbutton()) { delay(startDelay); }
+
+        uint v = knob6();
+        while (!stopbutton()) {
+            LCD.home(); LCD.clear();
+            LCD.setCursor(0,0); LCD.print("Speed: "); LCD.print(v);
+            run_motor(v);
+            v = knob6();
+            delay(setDelay);
+        }
+        set_speed(0);
+        initialize();
+    }
 
     LCD.clear(); LCD.home();
     LCD.setCursor(0,0); LCD.print("Sorry");

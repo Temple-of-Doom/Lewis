@@ -21,8 +21,6 @@ void lewis_tape()
 
     Timer2.set(PID_TIME, follow_tape);
     Timer2.start();
-	//DEPERACTED
-	/*
 	while (items < 3) {
 		if (is_idol()) {
 			set_speed(TAPE_PICKUP_SPEED);
@@ -30,7 +28,6 @@ void lewis_tape()
 			++items;
 		}
 	}
-	*/
 }
 void lewis_arm_setup()
 {

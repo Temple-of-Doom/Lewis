@@ -11,7 +11,7 @@ class motorClass
         {
             for (int i = 0 ; i < 4; ++i) {
                 pinMode(Motor_Direction[i], OUTPUT);
-                digitalWrite(Motor_Direction[i], HIGH);
+                digitalWrite(Motor_Direction[i], LOW);
                 analogWrite(Motor_Enable[i], 0);
             }
         }

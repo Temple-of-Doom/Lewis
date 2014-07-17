@@ -22,6 +22,7 @@ extern uint TAPE_KP;
 extern uint TAPE_KD;
 extern uint TAPE_SPEED;
 void print_lewis(int);
+void run_motor(uint);
 void spinning_jon_DEBUG(uint);
 #endif
 
@@ -29,8 +30,8 @@ void spinning_jon_DEBUG(uint);
 
 
 // TINAH analog pins
-#define aQRD_L 7
-#define aQRD_R 5
+#define aQRD_L 5
+#define aQRD_R 3
 
 // TINAH PWM
 #define pMOTOR_L 3

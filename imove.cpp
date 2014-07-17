@@ -1,6 +1,9 @@
 #include "ilewis.h"
 
-Servo253* Servo253::servo[1];
+Servo253* Servo253::_servos[8];
+uint8_t   Servo253::_count = 0;
+int8_t    Servo253::_current = -1;
+uint16_t  Servo253::_positionTicks = 0;
 Servo253 RCServo1;
 
 motorClass motor;
@@ -33,6 +36,14 @@ void follow_tape()
 	spinning_jon_pulse();
 }
 
+#if DEBUG
+void run_motor(uint v)
+{
+    motor.speed(pMOTOR_L, v);
+    motor.speed(pMOTOR_R, v);
+}
+#endif
+
 void follow_ir()
 {
 }
@@ -52,7 +63,7 @@ void servo_swerve()
 	RCServo1.detach();
 }
 
-void spinning_jon_pulse() {	motor.speed(pSPINNING_JON, SPINNING_JON_SPEED); }
+inline void spinning_jon_pulse() {	motor.speed(pSPINNING_JON, SPINNING_JON_SPEED); }
 
 #if DEBUG
 void spinning_jon_DEBUG(uint v) { motor.speed(pSPINNING_JON, v); }
